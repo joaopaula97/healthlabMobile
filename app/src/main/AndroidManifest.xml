@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="br.unibh.sdm.healthlabexames">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -10,8 +11,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCriptomoeda2"
-        android:usesCleartextTraffic="true">
+        android:theme="@style/Theme.healthlabexames"
+        android:usesCleartextTraffic="true"
+        >
         <activity android:name=".activities.pesquisarExames"></activity>
         <activity android:name=".activities.MainActivity">
             <intent-filter>
@@ -20,6 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
