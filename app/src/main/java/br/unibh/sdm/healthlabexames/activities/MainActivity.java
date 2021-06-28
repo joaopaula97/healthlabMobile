@@ -14,7 +14,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import br.unibh.sdm.healthlabexames.R;
 import br.unibh.sdm.healthlabexames.api.ExamesService;
@@ -25,6 +26,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+
+    private SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
         botaoSalvar.setOnClickListener(v -> {
             Log.i("FormularioExame","Clicou em Enviar");
             Exame exame = recuperaInformacoesFormulario();
-            salvaExame(exame);
+            if (exame != null){
+                salvaExame(exame);
+            }
         });
     }
 
@@ -69,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                 } else {
                     Log.e("FormularioExame", "Erro (" + response.code()+"): Verifique novamente os valores");
-                    Toast.makeText(getApplicationContext(), "Erro (" + response.code()+"): Verifique novamente os valores", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Erro (" + response.code()+"): Verifique novamente os valores - "+response.message(), Toast.LENGTH_LONG).show();
                 }
             }
             @Override
@@ -84,10 +89,17 @@ public class MainActivity extends AppCompatActivity {
         EditText matricula = findViewById(R.id.idMatricula);
         EditText nomeexame = findViewById(R.id.idExame);
         EditText data = findViewById(R.id.idData);
+        Log.i("FormularioExame", "Data = "+data.getText().toString());
         Exame exame = new Exame();
         exame.setMatricula(matricula.getText().toString());
         exame.setNomeExame(nomeexame.getText().toString());
-        exame.setDataExame(new Date());
-        return exame;
+        try {
+            exame.setDataExame(df.parse(data.getText().toString()));
+            return exame;
+        } catch (ParseException e) {
+            Log.w("FormularioExame", "Data = "+data.getText().toString()+" nao pode ser formatada.");
+            Toast.makeText(getApplicationContext(), "A data informada está incorreta. Favor conferir", Toast.LENGTH_LONG).show();
+            return null;
+        }
     }
 }

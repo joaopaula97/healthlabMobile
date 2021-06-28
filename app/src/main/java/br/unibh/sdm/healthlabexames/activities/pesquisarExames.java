@@ -62,11 +62,11 @@ public class pesquisarExames extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Exame>> call, Response<List<Exame>> response) {
                 if (response.isSuccessful()) {
-                    Log.i("PesquisaActivity", "Retornou " + response.body().size() + " Criptomoedas!");
+                    Log.i("PesquisaActivity", "Retornou " + response.body().size() + " Exames!");
                     List<String> lista = new ArrayList<String>();
                     for (Exame item : response.body()) {
-                        lista.add(item.getNomeExame());
                         lista.add(item.getMatricula());
+
                     }
                     Log.i("PesquisaActivity", lista.toArray().toString());
                     ListView listView = findViewById(R.id.listaDeExames);
