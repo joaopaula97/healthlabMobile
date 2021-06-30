@@ -1,9 +1,12 @@
 package br.unibh.sdm.healthlabexames.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -28,6 +31,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     private SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+    String[] tipoExames ={"Admissional","Periódico","Mudança de função","Retorno ao trabalho","Demissional","Avaliação ocupacional","Avaliação de enquadramento de PCD"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,12 @@ public class MainActivity extends AppCompatActivity {
         setTitle("Cadastro de Exame");
         configuraBotaoSalvar();
         criaAcaoBotaoFlutuante();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                (this,android.R.layout.select_dialog_item,tipoExames);
+        AutoCompleteTextView actv =  (AutoCompleteTextView)findViewById(R.id.idExame);
+        actv.setThreshold(1);
+        actv.setAdapter(adapter);
+        actv.setTextColor(Color.RED);
     }
 
     private void configuraBotaoSalvar() {

@@ -6,8 +6,8 @@ import java.util.Objects;
 public class Exame {
 
     private String matricula;
-    private String nomeExame;
-    private Date dataExame;
+    private String tipoExame;
+    private Date dataDoExame;
 
     public Exame() {
     }
@@ -15,15 +15,15 @@ public class Exame {
 
     @Override
     public int hashCode() {
-        return Objects.hash(matricula, nomeExame, dataExame);
+        return Objects.hash(matricula, tipoExame, dataDoExame);
     }
 
     public String getNomeExame() {
-        return nomeExame;
+        return tipoExame;
     }
 
     public Date getDataExame() {
-        return dataExame;
+        return dataDoExame;
     }
 
     public String getMatricula() {
@@ -35,12 +35,15 @@ public class Exame {
     }
 
     public void setNomeExame(String nomeExame) {
-        this.nomeExame = nomeExame;
+        this.tipoExame = nomeExame;
     }
 
     public void setDataExame(Date dataExame) {
-        this.dataExame = dataExame;
+        this.dataDoExame = dataExame;
     }
 
-
+    @Override
+    public String toString() {
+        return " " + matricula + " | " + tipoExame + " | " + dataDoExame ;
+    }
 }

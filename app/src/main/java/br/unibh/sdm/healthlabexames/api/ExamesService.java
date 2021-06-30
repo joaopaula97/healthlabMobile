@@ -5,6 +5,7 @@ import java.util.List;
 import br.unibh.sdm.healthlabexames.entidades.Exame;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
@@ -20,10 +21,13 @@ public interface ExamesService {
     Call<List<Exame>> getExames();
 
     @GET("relatoriosexames/{matricula}")
-    Call<Exame> getExames(@Path("matricula") String matricula);
+    Call<Exame> getExamesporid(@Path("matricula") String matricula);
 
 
     @POST("relatoriosexames")
     Call<Exame> atualizaexame( @Body Exame exame);
+
+    @DELETE("relatoriosexames/{matricula}")
+    Call<Boolean> excluiExame(@Path("matricula") String codigo);
 
 }
